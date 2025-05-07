@@ -15,6 +15,7 @@ import { ProfileClientComponent } from './pages/view-auth/profile-client/profile
 import { FilterAdvanceComponent } from './pages/guest-view/filter-advance/filter-advance.component';
 import { CampaingLinkComponent } from './pages/guest-view/campaing-link/campaing-link.component';
 import { CompareProductComponent } from './pages/guest-view/compare-product/compare-product.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
     {
@@ -85,5 +86,9 @@ export const routes: Routes = [
     {
         path: 'compare-product',
         component: CompareProductComponent,
+    },
+    {
+        path: 'contact', 
+        component: ContactComponent 
     },
 ];
