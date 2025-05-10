@@ -70,9 +70,12 @@
     
                           <!-- inventory details -->
                           <div class="tp-product-details-inventory d-flex align-items-center mb-10">
+                           <!--
+
                              <div class="tp-product-details-stock mb-10">
                                 <span>In Stock</span>
                              </div>
+                           -->
                              <div class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
                               <div class="tp-product-rating-icon">
                                  <span><i class="fa-solid fa-star" [ngClass]="{'fa-start-gris': PRODUCT_SELECTED.avg_reviews < 1}"></i></span>
@@ -90,12 +93,12 @@
                             {{ PRODUCT_SELECTED.resumen }}
                           </p>
     
-                          <!-- price -->
+                          <!-- 
                           <div class="tp-product-details-price-wrapper mb-20">
                              <span class="tp-product-details-price old-price" *ngIf="PRODUCT_SELECTED.discount_g">{{ getTotalCurrency(PRODUCT_SELECTED) }} {{ currency }}</span>
                              <span class="tp-product-details-price new-price">{{ getTotalPriceProduct(PRODUCT_SELECTED) }} {{ currency }}</span>
                           </div>
-    
+                          
                           <!-- variations -->
                           <div class="tp-product-details-variation">
                              <!-- single item -->
@@ -153,6 +156,7 @@
                           </div>
     
                           <!-- actions -->
+                           <!--
                           <div class="tp-product-details-action-wrapper">
                              <h3 class="tp-product-details-action-title">Quantity</h3>
                              <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
@@ -178,6 +182,8 @@
                              </div>
                              <button class="tp-product-details-buy-now-btn w-100">Buy Now</button>
                           </div>
+                      
+
                           <div class="tp-product-details-action-sm">
                              <button type="button" (click)="addCompareProduct(PRODUCT_SELECTED)" class="tp-product-details-action-sm-btn">
                                 <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -204,6 +210,7 @@
                                 Ask a question
                              </button>
                           </div>
+                           -->
                           <div class="tp-product-details-query">
                              <div class="tp-product-details-query-item d-flex align-items-center">
                                 <span>SKU:  </span>
@@ -225,6 +232,8 @@
                              <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
                              <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
                           </div>
+                          <!--
+
                           <div class="tp-product-details-msg mb-15">
                              <ul>
                                 <li>30 days easy returns</li>
@@ -235,6 +244,8 @@
                              <p>Guaranteed safe <br> & secure checkout</p>
                              <img src="assets/img/product/icons/payment-option.png" alt="">
                           </div>
+                           -->
+
                        </div>
                     </div>
                  </div>

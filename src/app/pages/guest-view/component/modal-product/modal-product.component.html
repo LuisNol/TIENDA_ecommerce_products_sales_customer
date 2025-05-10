@@ -37,9 +37,12 @@
 
        <!-- inventory details -->
        <div class="tp-product-details-inventory d-flex align-items-center mb-10">
+          <!--
+
           <div class="tp-product-details-stock mb-10">
              <span>In Stock</span>
           </div>
+         -->
           <div class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
             <div class="tp-product-rating-icon">
                <span><i class="fa-solid fa-star" [ngClass]="{'fa-start-gris': product_selected.avg_reviews < 1}"></i></span>
@@ -56,15 +59,15 @@
        <p>
           {{ product_selected.resumen }}
        </p>
+       <!--
 
-       <!-- price -->
        <div class="tp-product-details-price-wrapper mb-20">
           @if(product_selected.discount_g){
              <span class="tp-product-details-price old-price mx-1">{{ getTotalCurrency(product_selected) }} {{ currency }}</span>
           }
           <span class="tp-product-details-price new-price">{{ getTotalPriceProduct(product_selected) }} {{ currency }}</span>
        </div>
-
+      -->
        <!-- variations -->
        <div class="tp-product-details-variation">
           <!-- single item -->
@@ -122,31 +125,9 @@
        </div>
 
        <!-- actions -->
-       <div class="tp-product-details-action-wrapper">
-          <h3 class="tp-product-details-action-title">Quantity</h3>
-          <div class="tp-product-details-action-item-wrapper d-sm-flex align-items-center">
-             <div class="tp-product-details-quantity">
-                <div class="tp-product-quantity mb-15 mr-15">
-                   <span class="tp-cart-minus" id="tp-cart-minus-modal">
-                      <svg width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M1 1H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>                                                            
-                   </span>
-                   <input class="tp-cart-input" id="tp-cart-input-val" type="text" value="1"/>
-                   <span class="tp-cart-plus" id="tp-cart-plus-modal">
-                      <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M1 6H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M5.5 10.5V1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                   </span>
-                </div>
-             </div>
-             <div class="tp-product-details-add-to-cart mb-15 w-100">
-                <button class="tp-product-details-add-to-cart-btn w-100" (click)="addCart()">Add To Cart</button>
-             </div>
-          </div>
-          <button class="tp-product-details-buy-now-btn w-100">Buy Now</button>
-       </div>
+       
+      <!--
+
        <div class="tp-product-details-action-sm">
           <button type="button" class="tp-product-details-action-sm-btn">
              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,5 +154,7 @@
              Ask a question
           </button>
        </div>
+       -->
+
     </div>
  </div>
