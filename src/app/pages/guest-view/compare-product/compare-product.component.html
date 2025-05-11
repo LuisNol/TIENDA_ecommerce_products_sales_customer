@@ -53,22 +53,7 @@
                             
 
                           </tr>
-                          <tr>
-                            <th>Price</th>
-                            @for(PRODUCT of PRODUCTS;track PRODUCT.id){
-                                <td>
-                                    <div class="tp-compare-price">
-                                        @if(PRODUCT.discount_g){
-                                            <span class="old-price">{{ getTotalCurrency(PRODUCT) }} {{ currency }}</span>
-                                        }
-                                        <span>{{ getTotalPriceProduct(PRODUCT) }} {{ currency }}</span>
-
-                                    </div>
-                                </td>
-                            }
-                            
-
-                          </tr>
+                          
                           <tr>
                             <th>Variations</th>
 
