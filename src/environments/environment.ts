@@ -1,6 +1,6 @@
 export const environment = {
-    URL_BACKEND: 'http://api.dominio.com/',
-    URL_SERVICIOS: 'http://api.dominio.com/api',
-    URL_FRONTED: 'http://tienda.dominio.com',
     production: true,
+    URL_BACKEND: 'https://www.api.avisonline.store/',
+    URL_SERVICIOS: 'https://www.api.avisonline.store/api',
+    URL_FRONTED: 'https://www.avisonline.store/',
 };

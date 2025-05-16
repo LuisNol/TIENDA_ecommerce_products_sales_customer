@@ -7,48 +7,52 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule,RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
-  name:string = '';
+  name: string = '';
   surname: string = '';
   email: string = '';
   password: string = '';
-  phone:string = '';
+  phone: string = '';
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
-  ) {
-    
-  }
+  ) {}
 
-  register(){
-    if(!this.name ||
-      !this.surname ||
-      !this.email ||
-      !this.password ||
-      !this.phone){
-        this.toastr.error("Validacion","Necesitas ingresar todos los campos");
-        return;
+  register() {
+    if (!this.name || !this.surname || !this.email || !this.password || !this.phone) {
+      this.toastr.error("Todos los campos son obligatorios", "Validación");
+      return;
     }
-    let data = {
+
+    const data = {
       name: this.name,
       surname: this.surname,
       email: this.email,
       password: this.password,
       phone: this.phone,
-    }
-    this.authService.register(data).subscribe((resp:any) => {
-      console.log(resp);
-      this.toastr.success("Exito","Ingresa a tu correo para poder completar tu registro");
-      setTimeout(() => {
-        this.router.navigateByUrl("/login");
-      }, 500);
+    };
+
+    this.authService.register(data).subscribe({
+      next: (resp: any) => {
+        console.log("Respuesta del servidor:", resp);
+        this.toastr.success("Revisa tu correo para confirmar el registro", "Éxito");
+        setTimeout(() => {
+          this.router.navigateByUrl("/login");
+        }, 1000);
+      },
+      error: (err) => {
+        console.error("Error durante el registro:", err);
+        const msg = err?.error?.message || "Hubo un error inesperado";
+        this.toastr.error(msg, "Error");
+      }
     });
   }
-} 
+}
+

@@ -16,6 +16,7 @@ import { FilterAdvanceComponent } from './pages/guest-view/filter-advance/filter
 import { CampaingLinkComponent } from './pages/guest-view/campaing-link/campaing-link.component';
 import { CompareProductComponent } from './pages/guest-view/compare-product/compare-product.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { SubscribeComponent } from './pages/subscribe/subscribe.component';
 
 export const routes: Routes = [
     {
@@ -90,5 +91,11 @@ export const routes: Routes = [
     {
         path: 'contact', 
         component: ContactComponent 
+    },
+
+     {
+        path: 'subscribe', 
+        component: SubscribeComponent 
+        
     },
 ];
