@@ -17,6 +17,10 @@ import { CampaingLinkComponent } from './pages/guest-view/campaing-link/campaing
 import { CompareProductComponent } from './pages/guest-view/compare-product/compare-product.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SubscribeComponent } from './pages/subscribe/subscribe.component';
+import { AnuncioComponent } from './pages/anuncio/anuncio.component';
+import { ProductoComponent } from './pages/producto/producto.component';
+import { BlogComponent } from './pages/blog/blog.component';
+
 
 export const routes: Routes = [
     {
@@ -92,10 +96,23 @@ export const routes: Routes = [
         path: 'contact', 
         component: ContactComponent 
     },
-
-     {
+    {
         path: 'subscribe', 
         component: SubscribeComponent 
         
+    },
+    {
+        path: 'anuncio', 
+        component: AnuncioComponent 
+        
+    },
+    {
+        path: 'producto', 
+        component: ProductoComponent 
+        
+    },
+    {
+        path: 'blog',
+        component: BlogComponent 
     },
 ];
