@@ -1,4 +1,4 @@
-import { Component, afterRender } from '@angular/core';
+import { Component, OnInit, afterRender } from '@angular/core';
 import { HomeService } from './service/home.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -7,9 +7,10 @@ import { ModalProductComponent } from '../guest-view/component/modal-product/mod
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from './service/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { SubscribeComponent } from '../subscribe/subscribe.component'; // <-- Ya estaba
+import { GoogleAnalyticsService } from '../../shared/google-analytics.service';
 
-// Importa el SubscribeComponent como standalone
-import { SubscribeComponent } from '../subscribe/subscribe.component'; // Ajusta la ruta si es necesario
+// Google Analytics
 
 declare function SLIDER_PRINCIPAL([]): any;
 declare var $: any;
@@ -25,12 +26,12 @@ declare function MODAL_PRODUCT_DETAIL([]): any;
     RouterModule,
     CommonModule,
     ModalProductComponent,
-    SubscribeComponent // <-- Aquí agregamos el subscribe para que Angular lo reconozca
+    SubscribeComponent
   ],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'] // corregido de styleUrl a styleUrls (plural)
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   SLIDERS: any = [];
   CATEGORIES_RANDOMS: any = [];
@@ -60,6 +61,7 @@ export class HomeComponent {
     public cartService: CartService,
     private toastr: ToastrService,
     private router: Router,
+    private gaService: GoogleAnalyticsService // <-- Agregado aquí
   ) {
     this.homeService.home().subscribe((resp: any) => {
       console.log(resp);
@@ -79,7 +81,6 @@ export class HomeComponent {
 
       this.DISCOUNT_FLASH = resp.discount_flash;
       this.DISCOUNT_FLASH_PRODUCTS = resp.discount_flash_products;
-
     });
 
     afterRender(() => {
@@ -103,7 +104,8 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.currency = this.cookieService.get("currency") ? this.cookieService.get("currency") : 'PEN';
+    this.currency = this.cookieService.get("currency") || 'PEN';
+    this.gaService.sendEvent('page_view', { page_path: '/home' }); // <-- Agregado
   }
 
   addCompareProduct(TRADING_PRODUCT: any) {
@@ -136,19 +138,15 @@ export class HomeComponent {
       return;
     }
 
-    let discount_g = null;
-
-    if (PRODUCT.discount_g) {
-      discount_g = PRODUCT.discount_g;
-    }
+    let discount_g = PRODUCT.discount_g ?? null;
 
     let data = {
       product_id: PRODUCT.id,
-      type_discount: discount_g ? discount_g.type_discount : null,
-      discount: discount_g ? discount_g.discount : null,
-      type_campaing: discount_g ? discount_g.type_campaing : null,
+      type_discount: discount_g?.type_discount ?? null,
+      discount: discount_g?.discount ?? null,
+      type_campaing: discount_g?.type_campaing ?? null,
       code_cupon: null,
-      code_discount: discount_g ? discount_g.code : null,
+      code_discount: discount_g?.code ?? null,
       product_variation_id: null,
       quantity: 1,
       price_unit: this.currency == 'PEN' ? PRODUCT.price_pen : PRODUCT.price_usd,
@@ -158,7 +156,6 @@ export class HomeComponent {
     };
 
     this.cartService.registerCart(data).subscribe((resp: any) => {
-      console.log(resp);
       if (resp.message == 403) {
         this.toastr.error("Validacion", resp.message_text);
       } else {
@@ -173,34 +170,24 @@ export class HomeComponent {
   getLabelSlider(SLIDER: any) {
     var miDiv: any = document.getElementById('label-' + SLIDER.id);
     miDiv.innerHTML = SLIDER.label;
-    return '';
   }
 
   getSubtitleSlider(SLIDER: any) {
     var miDiv: any = document.getElementById('subtitle-' + SLIDER.id);
     miDiv.innerHTML = SLIDER.subtitle;
-    return '';
   }
 
   getTitleBannerSecundario(BANNER: any, ID_BANNER: string) {
     var miDiv: any = document.getElementById(ID_BANNER);
     miDiv.innerHTML = BANNER.title;
-    return '';
   }
 
   getNewTotal(PRODUCT: any, DISCOUNT_FLASH_P: any) {
-    if (this.currency == 'PEN') {
-      if (DISCOUNT_FLASH_P.type_discount == 1) {//% DE DESCUENTO 50
-        return (PRODUCT.price_pen - PRODUCT.price_pen * (DISCOUNT_FLASH_P.discount * 0.01)).toFixed(2);
-      } else {//-PEN/-USD 
-        return (PRODUCT.price_pen - DISCOUNT_FLASH_P.discount).toFixed(2);
-      }
+    let price = this.currency == 'PEN' ? PRODUCT.price_pen : PRODUCT.price_usd;
+    if (DISCOUNT_FLASH_P.type_discount == 1) {
+      return (price - price * (DISCOUNT_FLASH_P.discount * 0.01)).toFixed(2);
     } else {
-      if (DISCOUNT_FLASH_P.type_discount == 1) {
-        return (PRODUCT.price_usd - PRODUCT.price_usd * (DISCOUNT_FLASH_P.discount * 0.01)).toFixed(2);
-      } else {
-        return (PRODUCT.price_usd - DISCOUNT_FLASH_P.discount).toFixed(2);
-      }
+      return (price - DISCOUNT_FLASH_P.discount).toFixed(2);
     }
   }
 
@@ -208,19 +195,11 @@ export class HomeComponent {
     if (PRODUCT.discount_g) {
       return this.getNewTotal(PRODUCT, PRODUCT.discount_g);
     }
-    if (this.currency == 'PEN') {
-      return PRODUCT.price_pen;
-    } else {
-      return PRODUCT.price_usd;
-    }
+    return this.currency == 'PEN' ? PRODUCT.price_pen : PRODUCT.price_usd;
   }
 
   getTotalCurrency(PRODUCT: any) {
-    if (this.currency == 'PEN') {
-      return PRODUCT.price_pen;
-    } else {
-      return PRODUCT.price_usd;
-    }
+    return this.currency == 'PEN' ? PRODUCT.price_pen : PRODUCT.price_usd;
   }
 
   openDetailProduct(PRODUCT: any, DISCOUNT_FLASH: any = null) {

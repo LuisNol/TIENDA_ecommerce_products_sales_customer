@@ -114,5 +114,7 @@ export const routes: Routes = [
     {
         path: 'blog',
         component: BlogComponent 
+        //////////////////
+        //hola
     },
 ];
