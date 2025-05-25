@@ -1,6 +1,6 @@
 import { Component, OnInit, isDevMode, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart, NavigationCancel, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { filter } from 'rxjs/operators';
@@ -31,17 +31,31 @@ export class AppComponent implements OnInit {
       });
     });
 
-    // Registrar vistas en Google Analytics
+    // Registrar vistas en Google Analytics y Clarity al completar la navegación
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
       gtag('config', 'G-Q186NQWYXM', {
         page_path: event.urlAfterRedirects
       });
-
-      // Registrar vistas en Microsoft Clarity
       clarity('set', 'page', event.urlAfterRedirects);
       clarity('send', 'pageview');
+    });
+
+    // Escuchar cuando comienza una navegación
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart)
+    ).subscribe((event: NavigationStart) => {
+      console.log('Navegación iniciada a:', event.url);
+      // Aquí podrías agregar código extra si quieres al iniciar navegación
+    });
+
+    // Escuchar cuando se cancela una navegación
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationCancel)
+    ).subscribe((event: NavigationCancel) => {
+      console.log('Navegación cancelada a:', event.url);
+      // Aquí podrías agregar código extra si quieres al cancelar navegación
     });
   }
 
