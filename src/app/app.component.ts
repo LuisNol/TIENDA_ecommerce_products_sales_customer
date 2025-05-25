@@ -8,6 +8,7 @@ import { filter } from 'rxjs/operators';
 declare var $: any;
 declare function HOMEINIT([]): any;
 declare let gtag: Function;
+declare let clarity: Function;  // <-- Agregado para Clarity
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,10 @@ export class AppComponent implements OnInit {
       gtag('config', 'G-Q186NQWYXM', {
         page_path: event.urlAfterRedirects
       });
+
+      // Registrar vistas en Microsoft Clarity
+      clarity('set', 'page', event.urlAfterRedirects);
+      clarity('send', 'pageview');
     });
   }
 
