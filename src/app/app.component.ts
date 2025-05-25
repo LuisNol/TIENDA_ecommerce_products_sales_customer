@@ -15,7 +15,7 @@ declare let clarity: Function;  // <-- Agregado para Clarity
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']  // corregí aquí styleUrls (era styleUrl)
 })
 export class AppComponent implements OnInit {
   title = 'ecommerce';
@@ -45,16 +45,18 @@ export class AppComponent implements OnInit {
     // Escuchar cuando comienza una navegación
     this.router.events.pipe(
       filter(event => event instanceof NavigationStart)
-    ).subscribe((event: NavigationStart) => {
-      console.log('Navegación iniciada a:', event.url);
+    ).subscribe(event => {
+      const navStart = event as NavigationStart;
+      console.log('Navegación iniciada a:', navStart.url);
       // Aquí podrías agregar código extra si quieres al iniciar navegación
     });
 
     // Escuchar cuando se cancela una navegación
     this.router.events.pipe(
       filter(event => event instanceof NavigationCancel)
-    ).subscribe((event: NavigationCancel) => {
-      console.log('Navegación cancelada a:', event.url);
+    ).subscribe(event => {
+      const navCancel = event as NavigationCancel;
+      console.log('Navegación cancelada a:', navCancel.url);
       // Aquí podrías agregar código extra si quieres al cancelar navegación
     });
   }
