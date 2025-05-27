@@ -55,12 +55,21 @@ export class FilterAdvanceComponent {
     });
 
     this.activedRoute.queryParams.subscribe((resp: any) => {
-      this.search = resp.search;
-    });
-
-    this.homeService.filterAdvanceProduct({ search: this.search }).subscribe((resp: any) => {
-      console.log(resp);
-      this.PRODUCTS = resp.products.data;
+      this.search = resp.search || '';
+      
+      // Capturar categoría de la URL si existe
+      if (resp.categorias) {
+        // Convertir a número si es necesario
+        const categoryId = parseInt(resp.categorias) || resp.categorias;
+        
+        // Verificar que no esté ya en el array para evitar duplicados
+        if (!this.categories_selected.includes(categoryId)) {
+          this.categories_selected.push(categoryId);
+        }
+      }
+      
+      // Realizar la búsqueda con los filtros actualizados
+      this.filterAdvanceProduct();
     });
 
     afterNextRender(() => {
