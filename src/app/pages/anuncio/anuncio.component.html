@@ -1,3 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aviso VIP - Recepcionista Hospedaje</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  
- <a href="https://www.avisonline.store/productos-busqueda">Anuncio</a>
+        body {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .aviso-vip {
+            background: rgba(255, 215, 0, 0.15);
+            border: 3px solid gold;
+            border-radius: 15px;
+            padding: 30px 40px;
+            max-width: 450px;
+            box-shadow: 0 0 15px 3px gold;
+            text-align: center;
+        }
+
+        .aviso-vip h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: gold;
+            text-shadow: 0 0 8px #ffd700;
+        }
+
+        .aviso-vip h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .aviso-vip p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: #eee;
+        }
+
+        .aviso-vip ul {
+            text-align: left;
+            margin: 15px 0 25px 20px;
+            color: #f5f5dc;
+            font-weight: 600;
+        }
+
+        .aviso-vip ul li {
+            margin-bottom: 10px;
+        }
+
+        .aviso-vip .contacto {
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: gold;
+            text-shadow: 0 0 5px #ffd700;
+        }
+
+        .btn-postular {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #4b6cb7;
+            background: gold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-postular:hover {
+            background: #f0c419;
+            color: #182848;
+        }
+
+        @media (max-width: 500px) {
+            .aviso-vip {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .aviso-vip h1 {
+                font-size: 2rem;
+            }
+
+            .aviso-vip h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="aviso-vip">
+        <h1>¡Oportunidad VIP!</h1>
+        <h2>Buscamos Recepcionista para Hospedaje</h2>
+        <p>¿Eres una persona amable, organizada y con ganas de formar parte de un equipo exclusivo? ¡Esta es tu oportunidad!</p>
+        <p><strong>Requisitos:</strong></p>
+        <ul>
+            <li>Experiencia en atención al cliente y recepción</li>
+            <li>Manejo básico de sistemas de reservaciones</li>
+            <li>Excelente comunicación verbal y escrita</li>
+            <li>Responsabilidad y puntualidad</li>
+            <li>Disponibilidad para trabajar en turnos rotativos</li>
+        </ul>
+        <p>Ofrecemos un ambiente laboral VIP, capacitación y oportunidad de crecimiento.</p>
+        <p class="contacto">Contáctanos: <a href="mailto:rrhh&#64;hospedajevip.com" style="color: gold; text-decoration: underline;">rrhh&#64;hospedajevip.com</a> | Tel: +52 55 1234 5678
+        
+        <a href="mailto:rrhh@hospedajevip.com" class="btn-postular">Postúlate Aquí</a>
+    </div>
+</body>
+</html>

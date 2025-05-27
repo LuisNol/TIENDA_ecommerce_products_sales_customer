@@ -144,29 +144,31 @@
     <!-- slider area end -->
   
     <!-- product category area start -->
-    <section class="tp-product-category pt-60 pb-15">
-       <div class="container">
-          <div class="row row-cols-xl-5 row-cols-lg-5 row-cols-md-4">
-            @for(CATEGORIES_RANDOM of CATEGORIES_RANDOMS;track CATEGORIES_RANDOM.id) {
-               <div class="col">
-                  <div class="tp-product-category-item text-center mb-40">
-                     <div class="tp-product-category-thumb fix">
-                        <a href="#" onclick="return false;">
-                           <img [src]="CATEGORIES_RANDOM.imagen" style="width: 76px;height: 160px;object-fit: contain;" alt="product-category">
-                        </a>
-                     </div>
-                     <div class="tp-product-category-content">
-                        <h3 class="tp-product-category-title">
-                           <a href="#" onclick="return false;">{{ CATEGORIES_RANDOM.name }}</a>
-                        </h3>
-                        <p>{{ CATEGORIES_RANDOM.products_count }} Avisos</p>
-                     </div>
-                  </div>
+<section class="tp-product-category pt-60 pb-15">
+   <div class="container">
+      <div class="row row-cols-xl-5 row-cols-lg-5 row-cols-md-4">
+         <div class="col" *ngFor="let CATEGORIES_RANDOM of CATEGORIES_RANDOMS; trackBy: trackById">
+            <div class="tp-product-category-item text-center mb-40">      
+               <div class="tp-product-category-thumb fix">
+                  <a href="#" (click)="goToCategory(CATEGORIES_RANDOM); $event.preventDefault()">
+                     <img [src]="CATEGORIES_RANDOM.imagen" style="width: 76px;height: 160px;object-fit: contain;" alt="product-category">
+                  </a>
                </div>
-            }
-          </div>
-       </div>
-    </section>
+               <div class="tp-product-category-content">
+                  <h3 class="tp-product-category-title">
+                     <a href="#" (click)="goToCategory(CATEGORIES_RANDOM); $event.preventDefault()">{{ CATEGORIES_RANDOM.name }}</a>
+                  </h3>
+                  <p>{{ CATEGORIES_RANDOM.products_count }} Avisos</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+
+
     <!-- product category area end -->
   
     <!-- feature area start -->

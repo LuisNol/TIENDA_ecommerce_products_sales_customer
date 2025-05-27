@@ -60,20 +60,22 @@
                       </div>
                    </div>
                    <!-- categories -->
-                   <div class="tp-shop-widget mb-50">
-                      <h3 class="tp-shop-widget-title">Categories</h3>
+                     <div class="tp-shop-widget mb-50"> 
+                     <h3 class="tp-shop-widget-title">Categories</h3>
+                     <div class="tp-shop-widget-content">
+                      <div class="tp-shop-widget-categories">
+                      <ul>
+                        <li *ngFor="let categorie of Categories; trackBy: trackById">
+                          <a href="#" onclick="return false;" (click)="addCategorie(categorie)"
+                            [ngClass]="{'selected-categories': categories_selected.includes(categorie.id)}">
+                            {{ categorie.name }} <span>{{ categorie.products_count }}</span>
+                            </a>
+                      </li>
+                     </ul>
+    </div>
+  </div>
+</div>
 
-                      <div class="tp-shop-widget-content">
-                         <div class="tp-shop-widget-categories">
-                            <ul>
-                                @for(categorie of Categories; track categorie.id) {
-                                    <li><a href="#" onclick="return false;" (click)="addCategorie(categorie)" [ngClass]="{'selected-categories': categories_selected.includes(categorie.id)}">{{ categorie.name }} <span>{{ categorie.products_count }}</span></a></li>
-                                }
-                               
-                            </ul>
-                         </div>
-                      </div>
-                   </div>
                    <!-- color -->
                    <div class="tp-shop-widget mb-50">
                       <h3 class="tp-shop-widget-title">Filtrar por color</h3>

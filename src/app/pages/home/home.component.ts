@@ -7,7 +7,7 @@ import { ModalProductComponent } from '../guest-view/component/modal-product/mod
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from './service/cart.service';
 import { ToastrService } from 'ngx-toastr';
-import { SubscribeComponent } from '../subscribe/subscribe.component'; // <-- Ya estaba
+import { SubscribeComponent } from '../subscribe/subscribe.component';
 import { GoogleAnalyticsService } from '../../shared/google-analytics.service';
 
 // Google Analytics
@@ -55,13 +55,15 @@ export class HomeComponent implements OnInit {
   variation_selected: any = null;
   currency: string = 'PEN';
 
+  categories_selected: any[] = [];
+
   constructor(
     public homeService: HomeService,
     private cookieService: CookieService,
     public cartService: CartService,
     private toastr: ToastrService,
     private router: Router,
-    private gaService: GoogleAnalyticsService // <-- Agregado aquí
+    private gaService: GoogleAnalyticsService
   ) {
     this.homeService.home().subscribe((resp: any) => {
       console.log(resp);
@@ -105,7 +107,31 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.currency = this.cookieService.get("currency") || 'PEN';
-    this.gaService.sendEvent('page_view', { page_path: '/home' }); // <-- Agregado
+    this.gaService.sendEvent('page_view', { page_path: '/home' });
+  }
+
+  goToCategory(category: any): void {
+    this.router.navigate(['/productos-busqueda'], {
+      queryParams: {
+        categorias: category.id
+      }
+    });
+  }
+
+  addCategorie(categorie: any) {
+    let INDEX = this.categories_selected.findIndex((item: any) => item == categorie.id);
+    if (INDEX != -1) {
+      this.categories_selected.splice(INDEX, 1);
+    } else {
+      this.categories_selected.push(categorie.id);
+    }
+    console.log(this.categories_selected);
+    this.filterAdvanceProduct();
+  }
+
+  filterAdvanceProduct() {
+    // Puedes definir o llamar tu filtro aquí (en home si quieres)
+    // o mejor que filtre en el componente de búsqueda usando los query params
   }
 
   addCompareProduct(TRADING_PRODUCT: any) {
@@ -221,5 +247,10 @@ export class HomeComponent implements OnInit {
       this.variation_selected = variation;
       MODAL_PRODUCT_DETAIL($);
     }, 50);
+  }
+
+  // Este es el método para trackBy usado en el *ngFor
+  trackById(index: number, item: any): any {
+    return item.id;
   }
 }
