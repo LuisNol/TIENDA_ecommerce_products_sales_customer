@@ -341,7 +341,7 @@ function HOMEINIT($) {
 		var settings_html = `<div class="tp-theme-settings-area transition-3">
 		<div class="tp-theme-wrapper">
 		   <div class="tp-theme-header text-center">
-			  <h4 class="tp-theme-header-title">Harry Theme Settings</h4>
+			  <h4 class="tp-theme-header-title">Configuración del tema de Harry</h4>
 		   </div>
 
 		   <!-- THEME TOGGLER -->
@@ -355,14 +355,8 @@ function HOMEINIT($) {
 		   </div>
 
 		   <!--  RTL SETTINGS -->
-		   <div class="tp-theme-dir mb-20">
-			  <label class="tp-theme-dir-main" for="tp-dir-toggler">
-				 <span class="tp-theme-dir-rtl"> RTL</span>
-					<input type="checkbox" id="tp-dir-toggler">
-					<i class="tp-theme-dir-slide"></i>
-				 <span class="tp-theme-dir-ltr active"> LTR</span>
-			  </label>
-		   </div>
+		   
+
 
 		   <!-- COLOR SETTINGS -->
 		   <div class="tp-theme-settings">
@@ -422,7 +416,7 @@ function HOMEINIT($) {
 				 </div>
 			  </div>
 			  <div class="tp-theme-color-input">
-				 <h6>Choose Custom Color</h6>
+				 <h6>Elija un color personalizado</h6>
 				 <input type="color" id="tp-color-setings-input" value="#F50963">
 				 <label id="tp-theme-color-label" for="tp-color-setings-input"></label>
 			  </div>

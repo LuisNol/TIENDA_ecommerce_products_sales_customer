@@ -356,12 +356,12 @@
                             </div>
                             <div class="tp-header-login-content d-none d-xl-block" *ngIf="!user">
                                <span>Hello, Invitado</span>
-                               <h5 class="tp-header-login-title"><a routerLink="/login">Sign In</a></h5>
+                               <h5 class="tp-header-login-title"><a routerLink="/login">Iniciar sesión</a></h5>
                             </div>
 
                             <div class="tp-header-login-content d-none d-xl-block" *ngIf="user">
                               <span>Hello, {{ user.full_name }}</span>
-                              <h5 class="tp-header-login-title"><a routerLink="/perfil-del-cliente" target="_blank">Go Profile</a> </h5>
+                              <h5 class="tp-header-login-title"><a routerLink="/perfil-del-cliente" target="_blank">Ir al perfil</a> </h5>
                            </div>
 
                          </div>
@@ -546,12 +546,8 @@
                                        <li><a routerLink="/blog" class="tp-header-link">Blog de AvisOnLine</a></li>
                                   </ul>
                                </li>
-
-                               <li class="has-dropdown">
-                                <a class="tp-header-link">Contáctanos</a>
-                                 <ul class="tp-submenu">
-                                   <li><a routerLink="/contact" class="tp-header-link">Publica tu aviso</a></li>
-                                 </ul>
+                               <li  class="has-mega-menu">
+                                 <a href="/contact" class="tp-header-link">Contáctanos</a>                                           
                               </li>
 
                             </ul>
@@ -632,11 +628,8 @@
                                        <li><a routerLink="/blog" class="tp-header-link">Blog de AvisOnLine</a></li>
                                   </ul>
                                </li>
-                               <li class="has-dropdown">
-                                <a class="tp-header-link">Contáctanos</a>
-                                 <ul class="tp-submenu">
-                                   <li><a routerLink="/contact" class="tp-header-link">Publica tu aviso</a></li>
-                                 </ul>
+                               <li  class="has-mega-menu">
+                                 <a href="/contact" class="tp-header-link">Contáctanos</a>                                           
                               </li>
                       </ul>
                    </nav>

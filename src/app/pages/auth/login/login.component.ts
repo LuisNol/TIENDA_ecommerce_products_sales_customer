@@ -76,7 +76,7 @@ export class LoginComponent {
         return;
       }
       if(resp == true){
-        this.toastr.success("Exito",'Bienvenido a la tienda');
+        this.toastr.success("Exito",'Bienvenido a AvisOnline');
         setTimeout(() => {
           this.router.navigateByUrl("/");
         }, 500);
