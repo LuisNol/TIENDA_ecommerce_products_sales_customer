@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, RouterModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
@@ -26,8 +26,14 @@ export class RegisterComponent {
   ) {}
 
   register() {
-    if (!this.name || !this.surname || !this.email || !this.password || !this.phone) {
-      this.toastr.error("Todos los campos son obligatorios", "Validación");
+    if (
+      !this.name ||
+      !this.surname ||
+      !this.email ||
+      !this.password ||
+      !this.phone
+    ) {
+      this.toastr.error("Validación", "Necesitas ingresar todos los campos");
       return;
     }
 
@@ -41,18 +47,38 @@ export class RegisterComponent {
 
     this.authService.register(data).subscribe({
       next: (resp: any) => {
-        console.log("Respuesta del servidor:", resp);
-        this.toastr.success("Revisa tu correo para confirmar el registro", "Éxito");
+        console.log(resp);
+        this.toastr.success("Éxito", "Ingresa a tu correo para poder completar tu registro");
         setTimeout(() => {
           this.router.navigateByUrl("/login");
-        }, 1000);
+        }, 500);
       },
-      error: (err) => {
-        console.error("Error durante el registro:", err);
-        const msg = err?.error?.message || "Hubo un error inesperado";
-        this.toastr.error(msg, "Error");
+      error: (err: any) => {
+        console.error(err);
+
+        let parsedError: any;
+
+        // Verifica si error es un string JSON y lo parsea
+        try {
+          parsedError = typeof err.error === 'string' ? JSON.parse(err.error) : err.error;
+        } catch (e) {
+          parsedError = {};
+        }
+
+        const emailTaken =
+          parsedError.email &&
+          Array.isArray(parsedError.email) &&
+          parsedError.email.includes("The email has already been taken.");
+
+        if (emailTaken) {
+          this.toastr.error("Este correo ya está registrado. Por favor inicia sesión.");
+          setTimeout(() => {
+            this.router.navigateByUrl("/login");
+          }, 1500);
+        } else {
+          this.toastr.error("Error", "Verifica los datos ingresados.");
+        }
       }
     });
   }
 }
-
